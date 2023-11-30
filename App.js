@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { WelcomeNavigator } from './components/WelcomeComponents';
 
-export default function App() {
+
+
+const App = () => {
+
   return (
-    <View style={styles.container}>
-      <Text>This is main file. Components will be called here. so build your components in the components folder and come and call them here. make sure to group code. refer to docs if anything. happy coding</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <WelcomeNavigator/>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
+export default App;
