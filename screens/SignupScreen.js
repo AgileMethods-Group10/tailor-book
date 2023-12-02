@@ -6,18 +6,20 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-
-const LoginScreen = () => {
+const SignupScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [fullName, setFullName] = useState("");
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -34,8 +36,8 @@ const LoginScreen = () => {
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
   });
-
   const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -44,18 +46,39 @@ const LoginScreen = () => {
           style={{ width: 120, height: 120 }}
         />
         <Text
-          style={{ fontFamily: "Poppins-Medium", paddingTop: 30, fontSize: 24 }}
+          style={{ fontFamily: "Poppins-Medium", paddingTop: 10, fontSize: 24 }}
         >
-          Log into your Account
+          Create an Account
         </Text>
-        <Text style={{ fontFamily: "Poppins-Regular", paddingBottom: 30 }}>
-          Welcome back, please enter your details.
+        <Text style={{ fontFamily: "Poppins-Regular", paddingBottom: 20 }}>
+          Sign up now to get started with an account
         </Text>
       </View>
 
-      {/* Email Input */}
-      <Text style={{ fontFamily: "Poppins-Regular", color: "#5A6676" }}>
-        Email Address
+      <Text
+        style={{
+          fontFamily: "Poppins-Regular",
+          color: "#5A6676",
+          paddingTop: 10,
+        }}
+      >
+        Full Name <Text style={{ color: "red" }}>*</Text>
+      </Text>
+      <TextInput
+        style={styles.input}
+        placeholder="John Doe"
+        keyboardType="text"
+        value={fullName}
+        onChangeText={(text) => setFullName(text)}
+      />
+      <Text
+        style={{
+          fontFamily: "Poppins-Regular",
+          color: "#5A6676",
+          paddingTop: 10,
+        }}
+      >
+        Email Address <Text style={{ color: "red" }}>*</Text>
       </Text>
       <TextInput
         style={styles.input}
@@ -65,16 +88,38 @@ const LoginScreen = () => {
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
-
-      {/* Password Input with Eye Button */}
       <Text
         style={{
           fontFamily: "Poppins-Regular",
           color: "#5A6676",
-          paddingTop: 20,
+          paddingTop: 10,
         }}
       >
-        Password
+        Password <Text style={{ color: "red" }}>*</Text>
+      </Text>
+      <View style={styles.passwordInputContainer}>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Password"
+          secureTextEntry={!showPassword}
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <TouchableOpacity onPress={toggleShowPassword} style={styles.eyeButton}>
+          <Icon
+            name={showPassword ? "eye" : "eye-off"}
+            type="material-community"
+          />
+        </TouchableOpacity>
+      </View>
+      <Text
+        style={{
+          fontFamily: "Poppins-Regular",
+          color: "#5A6676",
+          paddingTop: 10,
+        }}
+      >
+        Confirm Password <Text style={{ color: "red" }}>*</Text>
       </Text>
       <View style={styles.passwordInputContainer}>
         <TextInput
@@ -92,32 +137,34 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Remember Me Checkbox and Forgot Password */}
-      <View style={styles.checkboxContainer}>
-        <View style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          <Checkbox
-            value={rememberMe}
-            onValueChange={() => setRememberMe(!rememberMe)}
-          />
-          <Text style={{ fontFamily: "Poppins-Regular", color: "#5A6676" }}>
-            Remember Me
-          </Text>
-        </View>
-        <TouchableOpacity>
-          <Text style={{ fontFamily: "Poppins-Medium" }} onPress={() => navigation.navigate("ForgotPasswordScreen")}>Forgot Password?</Text>
-        </TouchableOpacity>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "10px",
+          paddingTop: 20,
+        }}
+      >
+        <Checkbox
+          value={rememberMe}
+          onValueChange={() => setRememberMe(!rememberMe)}
+        />
+        <Text style={{ fontFamily: "Poppins-Regular", color: "#5A6676" }}>
+          I have read and agreed to the{" "}
+          <Text style={{ color: "#3387F5" }}>Terms and Services</Text>
+        </Text>
       </View>
 
       {/* Login Button */}
       <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
         <Text
           style={{
-            fontFamily: "Poppins-Regular",
+            fontFamily: "Poppins-Medium",
             color: "#fff",
             textAlign: "center",
           }}
         >
-          Login
+          Get Started
         </Text>
       </TouchableOpacity>
 
@@ -153,7 +200,7 @@ const LoginScreen = () => {
         <Text
           style={{
             fontFamily: "Poppins-Regular",
-            paddingTop: 40,
+            paddingTop: 30,
           }}
         >
           Don’t have an account?
@@ -163,12 +210,12 @@ const LoginScreen = () => {
             style={{
               fontFamily: "Poppins-Regular",
               color: "#1676F3",
-              paddingTop: 40,
+              paddingTop: 30,
               paddingLeft: 5,
             }}
-           onPress={() => navigation.navigate("SignupScreen")}
+            onPress={() => navigation.navigate("LoginScreen")}
           >
-            Signup
+            Log in
           </Text>
         </TouchableOpacity>
       </View>
@@ -234,7 +281,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomWidth: 1,
     borderColor: "#ccc",
-    marginVertical: 30,
+    marginVertical: 15,
   },
   socialLogosContainer: {
     flexDirection: "row",
@@ -247,4 +294,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;
