@@ -33,6 +33,7 @@ const LoginScreen = () => {
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
 
   const navigation = useNavigation();
@@ -44,7 +45,7 @@ const LoginScreen = () => {
           style={{ width: 120, height: 120 }}
         />
         <Text
-          style={{ fontFamily: "Poppins-Medium", paddingTop: 30, fontSize: 24 }}
+          style={{ fontFamily: "Poppins-Bold", paddingTop: 30, fontSize: 24 }}
         >
           Log into your Account
         </Text>

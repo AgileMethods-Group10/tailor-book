@@ -13,14 +13,15 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
-  const handleLogin = () => {
-    // Implement your login logic here
-    console.log("Email:", email);
-  };
+//   const handleLogin = () => {
+//     // Implement your login logic here
+//     console.log("Email:", email);
+//   };
 
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
 
   const navigation = useNavigation();
@@ -33,10 +34,10 @@ const ForgotPasswordScreen = () => {
       <View style={styles.header}>
         <Image
           source={require("../assets/tailor-logo.png")}
-          style={{ width: 120, height: 120 }}
+          style={{ width: 140, height: 140 }}
         />
         <Text
-          style={{ fontFamily: "Poppins-Medium", paddingTop: 30, fontSize: 24 }}
+          style={{ fontFamily: "Poppins-Bold", paddingTop: 30, fontSize: 24 }}
         >
           Forgot Password
         </Text>
@@ -60,7 +61,7 @@ const ForgotPasswordScreen = () => {
       />
 
       {/* Login Button */}
-      <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+      <TouchableOpacity onPress={() => navigation.navigate("OTPScreen")} style={styles.loginButton}>
         <Text
           style={{
             fontFamily: "Poppins-Medium",
