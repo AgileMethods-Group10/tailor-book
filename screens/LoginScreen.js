@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Icon } from "react-native-elements";
+import { useFonts } from "expo-font";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -27,17 +28,32 @@ const LoginScreen = () => {
     console.log("Remember Me:", rememberMe);
   };
 
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
+  });
+
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/tailor-logo.png")}
-        style={{ width: 120, height: 120 }}
-      />
-      <Text>Log into your Account</Text>
-      <Text>Welcome back, please enter your details.</Text>
+      <View style={styles.header}>
+        <Image
+          source={require("../assets/tailor-logo.png")}
+          style={{ width: 120, height: 120 }}
+        />
+        <Text
+          style={{ fontFamily: "Poppins-Medium", paddingTop: 30, fontSize: 24 }}
+        >
+          Log into your Account
+        </Text>
+        <Text style={{ fontFamily: "Poppins-Regular", paddingBottom: 30 }}>
+          Welcome back, please enter your details.
+        </Text>
+      </View>
 
       {/* Email Input */}
-      <Text>Email Address</Text>
+      <Text style={{ fontFamily: "Poppins-Regular", color: "#5A6676" }}>
+        Email Address
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Email Address"
@@ -48,7 +64,15 @@ const LoginScreen = () => {
       />
 
       {/* Password Input with Eye Button */}
-      <Text>Password</Text>
+      <Text
+        style={{
+          fontFamily: "Poppins-Regular",
+          color: "#5A6676",
+          paddingTop: 20,
+        }}
+      >
+        Password
+      </Text>
       <View style={styles.passwordInputContainer}>
         <TextInput
           style={styles.passwordInput}
@@ -67,27 +91,37 @@ const LoginScreen = () => {
 
       {/* Remember Me Checkbox and Forgot Password */}
       <View style={styles.checkboxContainer}>
-        <Checkbox
-          value={rememberMe}
-          onValueChange={() => setRememberMe(!rememberMe)}
-        />
-        <Text>Remember Me</Text>
+        <View style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+          <Checkbox
+            value={rememberMe}
+            onValueChange={() => setRememberMe(!rememberMe)}
+          />
+          <Text style={{ fontFamily: "Poppins-Regular", color: "#5A6676" }}>
+            Remember Me
+          </Text>
+        </View>
         <TouchableOpacity>
-          <Text>Forgot Password?</Text>
+          <Text style={{ fontFamily: "Poppins-Medium" }}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
 
       {/* Login Button */}
       <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
-        <Text>Login</Text>
+        <Text
+          style={{
+            fontFamily: "Poppins-Regular",
+            color: "#fff",
+            textAlign: "center",
+          }}
+        >
+          Login
+        </Text>
       </TouchableOpacity>
 
       <View style={styles.divider} />
 
       {/* Social Logos */}
       <View style={styles.socialLogosContainer}>
-        {/* Add your social logos images here */}
-        {/* Example: */}
         <Image
           source={require("../assets/google.png")}
           style={styles.socialLogo}
@@ -98,12 +132,32 @@ const LoginScreen = () => {
         />
         <Image
           source={require("../assets/apple.png")}
-          style={styles.socialLogo}
+          style={{ width: 35, height: "auto" }}
         />
         <Image
-          source={require("../assets/facebook.png")}
+          source={require("../assets/twitter.png")}
           style={styles.socialLogo}
         />
+      </View>
+      <View style={{ display: "flex", flexDirection: "row", justifyContent: "center", width: "100%" }}>
+        <Text
+          style={{
+            fontFamily: "Poppins-Regular",
+            paddingTop: 40,
+          }}
+        >
+          Don’t have an account?
+        </Text>
+        <Text
+          style={{
+            fontFamily: "Poppins-Regular",
+            color: "#1676F3",
+            paddingTop: 40,
+            paddingLeft: 5,
+          }}
+        >
+        Signup
+        </Text>
       </View>
     </View>
   );
@@ -115,21 +169,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 30,
     backgroundColor: "#fff",
+    fontFamily: "Poppins-Regular",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   input: {
-    height: 40,
+    height: 55,
     width: "100%",
-    borderColor: "gray",
+    borderColor: "#ccc",
+    borderRadius: 5,
     borderWidth: 1,
-    marginVertical: 10,
+    marginVertical: 5,
     paddingHorizontal: 10,
   },
   passwordInput: {
-    height: 40,
+    height: 55,
     width: "100%",
-    borderColor: "gray",
+    borderColor: "#ccc",
+    borderRadius: 5,
     borderWidth: 1,
-    marginVertical: 10,
+    marginVertical: 5,
     paddingHorizontal: 10,
     position: "relative",
   },
@@ -137,7 +199,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    marginVertical: 10,
   },
   eyeButton: {
     position: "absolute",
@@ -146,13 +207,13 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 10,
   },
   loginButton: {
-    backgroundColor: "#4CAF50",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: "#1676F3",
+    paddingVertical: 20,
     borderRadius: 5,
     marginTop: 20,
   },
@@ -160,7 +221,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomWidth: 1,
     borderColor: "#ccc",
-    marginVertical: 20,
+    marginVertical: 30,
   },
   socialLogosContainer: {
     flexDirection: "row",
@@ -168,8 +229,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   socialLogo: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
   },
 });
 
