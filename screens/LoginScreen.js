@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,7 @@ import {
 import Checkbox from "expo-checkbox";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
-import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -105,7 +104,12 @@ const LoginScreen = () => {
           </Text>
         </View>
         <TouchableOpacity>
-          <Text style={{ fontFamily: "Poppins-Medium" }} onPress={() => navigation.navigate("ForgotPasswordScreen")}>Forgot Password?</Text>
+          <Text
+            style={{ fontFamily: "Poppins-Medium" }}
+            onPress={() => navigation.navigate("ForgotPasswordScreen")}
+          >
+            Forgot Password?
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -167,7 +171,7 @@ const LoginScreen = () => {
               paddingTop: 40,
               paddingLeft: 5,
             }}
-           onPress={() => navigation.navigate("SignupScreen")}
+            onPress={() => navigation.navigate("SignupScreen")}
           >
             Signup
           </Text>

@@ -84,7 +84,6 @@ const SignupScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Email Address"
-        keyboardType="email-address"
         autoCapitalize="none"
         value={email}
         onChangeText={(text) => setEmail(text)}

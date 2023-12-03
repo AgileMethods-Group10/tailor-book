@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/AntDesign";
-import CountDown from "react-native-countdown-component";
+import CountDownTimer from 'react-native-countdown-timer-hooks';
 import OTPTextView from "react-native-otp-textinput";
 import OTPTextInput, { ResendOTP } from "react-native-otp-textinput";
 
@@ -16,6 +16,7 @@ const OTPScreen = () => {
 
   const navigation = useNavigation();
   const [otp, setOtp] = useState("");
+  const refTimer = useRef();
 
   const handleOtpChange = (otp) => {
     setOtp(otp);
@@ -74,16 +75,22 @@ const OTPScreen = () => {
         />
         {/* <OTPTextInput ref={(e) => (otpInput = e)} tintColor /> */}
       </View>
-      <CountDown
-        until={60}
-        size={30}
-        digitStyle={{ backgroundColor: "#FFF" }}
-        digitTxtStyle={{ color: "#1676F3" }}
-        timeToShow={["S"]}
-        timeLabels={{ s: "secs" }}
-        onFinish={() => alert("finished")}
-        onPress={() => alert("counting...")}
-      />
+      <CountDownTimer
+          ref={refTimer}
+          timestamp={120}
+          containerStyle={{
+            height: 56,
+            width: "100%",
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          textStyle={{
+            fontSize: 25,
+            color: '#1676F3',
+            fontWeight: '500',
+            letterSpacing: 0.25,
+          }}
+        />
       <View
         style={{
           display: "flex",
@@ -108,7 +115,7 @@ const OTPScreen = () => {
               paddingTop: 40,
               paddingLeft: 5,
             }}
-            onPress={() => (email ? alert("Code sent to email") : null)}
+            // onPress={() => (email ? alert("Code sent to email") : null)}
           >
             Re-send
           </Text>
