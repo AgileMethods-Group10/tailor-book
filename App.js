@@ -1,20 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// import SplashScreen from "./screens/SplashScreen";
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import ForgotPasswordScreen from './screens/ForgotPassword';
+import OTPScreen from './screens/OTPScreen';
+import { useFonts } from "expo-font";
+import MySplashScreen from "./screens/SplashScreen";
+import * as SplashScreen from "expo-splash-screen";
 
-export default function App() {
+SplashScreen.preventAutoHideAsync();
+
+const Stack = createStackNavigator();
+
+const App = () => {
+
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+  });
+
+  const [isAssetsLoaded, setAssetsLoaded] = useState(false);
+
+  useEffect(() => {
+    const loadAssets = async () => {
+      await SplashScreen.hideAsync();
+      setAssetsLoaded(true);
+    };
+
+    if (fontsLoaded) {
+      loadAssets();
+    }
+  }, [fontsLoaded]);
+
+  if (!isAssetsLoaded) {
+    return <MySplashScreen />;
+  }
   return (
-    <View style={styles.container}>
-      <Text>This is main file. Components will be called here. so build your components in the components folder and come and call them here. make sure to group code. refer to docs if anything. happy coding</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SplashScreen" headerMode="none">
+        <Stack.Screen name="SplashScreen" component={MySplashScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="SignupScreen" component={SignupScreen} />
+        <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
+        <Stack.Screen name="OTPScreen" component={OTPScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
