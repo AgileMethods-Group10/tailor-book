@@ -9,6 +9,8 @@ import OTPScreen from './screens/OTPScreen';
 import { useFonts } from "expo-font";
 import MySplashScreen from "./screens/SplashScreen";
 import * as SplashScreen from "expo-splash-screen";
+import NewPasswordScreen from './screens/NewPassword';
+import PasswordSuccessScreen from './screens/PasswordSuccess';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -46,6 +48,8 @@ const App = () => {
         <Stack.Screen name="SignupScreen" component={SignupScreen} />
         <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
         <Stack.Screen name="OTPScreen" component={OTPScreen} />
+        <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
+        <Stack.Screen name="PasswordSuccessScreen" component={PasswordSuccessScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
