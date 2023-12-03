@@ -41,6 +41,8 @@ const App = () => {
   if (!isAssetsLoaded) {
     return <MySplashScreen />;
   }
+  
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SplashScreen" headerMode="none">
