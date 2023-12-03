@@ -42,7 +42,7 @@ const SignupScreen = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage)
+        alert(errorCode)
         // ..
       });
     console.log("Email:", email);

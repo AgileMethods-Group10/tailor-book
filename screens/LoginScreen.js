@@ -36,7 +36,7 @@ const LoginScreen = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage)
+        alert(errorCode)
       });
     // Implement your login logic here
     console.log("Email:", email);
