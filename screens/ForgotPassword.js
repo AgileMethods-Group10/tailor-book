@@ -9,14 +9,26 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from "react-native-vector-icons/AntDesign";
+import { sendPasswordResetEmail, getAuth } from "@firebase/auth";
+import app from "../Firebase";
 
+const auth = getAuth(app);
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
-//   const handleLogin = () => {
-//     // Implement your login logic here
-//     console.log("Email:", email);
-//   };
+  const [resetEmailSent, setResetEmailSent] = useState(false);
+  const resetPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Email with instructions has been sent to your email");
+        setResetEmailSent(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode);
+      });
+  };
 
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
@@ -28,9 +40,25 @@ const ForgotPasswordScreen = () => {
 
   return (
     <View style={styles.container}>
-         <View style={{backgroundColor: "#FAFAFA", borderColor: "#989898", borderWidth: 1, width: "17%", display: "flex", alignItems: "center", paddingVertical: 10, borderRadius: 5}}>
-            <Icon name="arrowleft" size={30} color="#000" onPress={() => navigation.goBack()} />
-         </View>
+      <View
+        style={{
+          backgroundColor: "#FAFAFA",
+          borderColor: "#989898",
+          borderWidth: 1,
+          width: "17%",
+          display: "flex",
+          alignItems: "center",
+          paddingVertical: 10,
+          borderRadius: 5,
+        }}
+      >
+        <Icon
+          name="arrowleft"
+          size={30}
+          color="#000"
+          onPress={() => navigation.goBack()}
+        />
+      </View>
       <View style={styles.header}>
         <Image
           source={require("../assets/tailor-logo.png")}
@@ -41,14 +69,26 @@ const ForgotPasswordScreen = () => {
         >
           Forgot Password
         </Text>
-        <Text style={{ fontFamily: "Poppins-Regular", paddingVertical: 15, textAlign: "center" }}>
+        <Text
+          style={{
+            fontFamily: "Poppins-Regular",
+            paddingVertical: 15,
+            textAlign: "center",
+          }}
+        >
           Enter the email address associated with your account to receive
           password reset code
         </Text>
       </View>
 
       {/* Email Input */}
-      <Text style={{ fontFamily: "Poppins-Regular", color: "#5A6676", paddingTop: 15, }}>
+      <Text
+        style={{
+          fontFamily: "Poppins-Regular",
+          color: "#5A6676",
+          paddingTop: 15,
+        }}
+      >
         Email Address
       </Text>
       <TextInput
@@ -61,7 +101,7 @@ const ForgotPasswordScreen = () => {
       />
 
       {/* Login Button */}
-      <TouchableOpacity onPress={() => navigation.navigate("OTPScreen")} style={styles.loginButton}>
+      <TouchableOpacity onPress={resetPassword} style={styles.loginButton}>
         <Text
           style={{
             fontFamily: "Poppins-Medium",

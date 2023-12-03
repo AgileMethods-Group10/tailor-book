@@ -8,8 +8,12 @@ import {
   StyleSheet,
 } from "react-native";
 import { useFonts } from "expo-font";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
+import app from "../Firebase";
+import { getAuth, updatePassword } from "firebase/auth";
+
+const auth = getAuth(app);
 
 const NewPasswordScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,10 +21,18 @@ const NewPasswordScreen = () => {
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  //   const handleLogin = () => {
-  //     // Implement your login logic here
-  //     console.log("Email:", email);
-  //   };
+  const navigation = useNavigation();
+
+  const updatePasswordFunc = () => {
+    const user = auth.currentUser;
+    updatePassword(user, password)
+      .then(() => {
+        navigation.navigate("PasswordSuccessScreen");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
@@ -28,7 +40,6 @@ const NewPasswordScreen = () => {
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
 
-  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -125,7 +136,7 @@ const NewPasswordScreen = () => {
       </View>
       {/* Login Button */}
       <TouchableOpacity
-        onPress={() => navigation.navigate("PasswordSuccessScreen")}
+        onPress={updatePasswordFunc}
         style={styles.loginButton}
       >
         <Text

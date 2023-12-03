@@ -123,7 +123,7 @@ const OTPScreen = () => {
       </View>
 
       {/* Login Button */}
-      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("NewPasswordScreen")}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("NewPasswordScreen", {email})}>
         <Text
           style={{
             fontFamily: "Poppins-Medium",

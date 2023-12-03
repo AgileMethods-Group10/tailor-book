@@ -13,6 +13,8 @@ import Checkbox from "expo-checkbox";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import app from "../Firebase";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -21,12 +23,28 @@ const SignupScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState("");
 
+  const navigation = useNavigation();
+  const auth = getAuth(app); 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleLogin = () => {
-    // Implement your login logic here
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user)
+        alert("You have successfully created an account! Login Now")
+        navigation.navigate("LoginScreen")
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorCode)
+        // ..
+      });
     console.log("Email:", email);
     console.log("Password:", password);
     console.log("Remember Me:", rememberMe);
@@ -37,7 +55,6 @@ const SignupScreen = () => {
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
-  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
