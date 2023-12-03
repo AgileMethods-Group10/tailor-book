@@ -11,7 +11,10 @@ import Checkbox from "expo-checkbox";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
+import app from "../Firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+const auth = getAuth();
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,10 +26,21 @@ const LoginScreen = () => {
   };
 
   const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user)
+        navigation.navigate("Welcome")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage)
+      });
     // Implement your login logic here
     console.log("Email:", email);
     console.log("Password:", password);
-    console.log("Remember Me:", rememberMe);
   };
 
   const [fontsLoaded] = useFonts({
