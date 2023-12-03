@@ -1,24 +1,39 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Dimensions, StyleSheet, Image} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-
+import SearchScreen from './SearchScreen';
+import NotificationScreen from './NotificationScreen';
 
 const Stack = createStackNavigator();
 
-
 const WelcomeScreen = ({ navigation }) => {
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "#fff" }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' , }}>
       <Image source={require('../assets/background.jpg')} style={styles.logoImage} />
-      <Text style={{ fontSize:20,}}>Welcome to the Tailoring Book </Text>
-      <Text style={{ fontSize:15, color:'#9F9CA1'}}>No clients added yet get started by adding a client</Text>
+      <Text style={{ fontSize: 20 }}>Welcome to the Tailoring Book </Text>
+      <Text style={{ fontSize: 15, color: '#9F9CA1' }}>No clients added yet get started by adding a client</Text>
     </View>
   );
+  
 };
 
 export const WelcomeNavigator = () =>{
+  const navigation = useNavigation();
+  
+  const handleSearchIconPress = () => {
+    // Navigate to the SearchScreen
+    navigation.navigate('Search');
+  };
+
+  const handleBellIconPress = () => {
+    navigation.navigate('Notifications'); // Navigate to the Notifications screen
+  };
+
   return(
     <>
       <Stack.Navigator >
@@ -36,10 +51,10 @@ export const WelcomeNavigator = () =>{
             ),
             headerRight: () => (
               <View style={{ flexDirection: 'row' }}>
-                <TouchableOpacity onPress={() => alert('Search Icon Pressed')}>
+                <TouchableOpacity onPress={handleSearchIconPress}>
                   <Ionicons name="search" size={30} color="black" style={{ marginHorizontal: 10 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => alert('Bell Icon Pressed')}>
+                <TouchableOpacity onPress={handleBellIconPress}>
                   <Ionicons name="notifications" size={30} color="black" style={{ marginHorizontal: 10 }} />
                 </TouchableOpacity>
               </View>
@@ -50,8 +65,11 @@ export const WelcomeNavigator = () =>{
             
           }}
         />
-       
+        <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Notifications" component={NotificationScreen} />
       </Stack.Navigator>
+      
+
       <View style={styles.bottomIconsContainer}>
       <TouchableOpacity style={styles.bottomIcon} onPress={() => alert('Orders Icon Pressed')}>
           <Ionicons name="list" size={30} color="#1676F3" />
@@ -64,8 +82,8 @@ export const WelcomeNavigator = () =>{
         </TouchableOpacity>
       </View>
     </>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   bottomIconsContainer: {
@@ -73,10 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#fff', // Change the background color as needed
-    
-  
     paddingVertical: 10,
-
   },
   bottomIcon: {
     marginHorizontal: 10,
