@@ -1,15 +1,11 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import React, { useState, useRef } from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/AntDesign";
-import CountDown from 'react-native-countdown-component';
+import CountDown from "react-native-countdown-component";
+import OTPTextView from "react-native-otp-textinput";
+import OTPTextInput, { ResendOTP } from "react-native-otp-textinput";
 
 const OTPScreen = () => {
   const [fontsLoaded] = useFonts({
@@ -19,7 +15,11 @@ const OTPScreen = () => {
   });
 
   const navigation = useNavigation();
+  const [otp, setOtp] = useState("");
 
+  const handleOtpChange = (otp) => {
+    setOtp(otp);
+  };
   return (
     <View style={styles.container}>
       <View
@@ -62,15 +62,27 @@ const OTPScreen = () => {
           Enter the OTP sent to the email address you entered
         </Text>
       </View>
+      <View>
+        <OTPTextView
+          handleTextChange={handleOtpChange}
+          defaultValue={otp}
+          containerStyle={styles.otpContainer}
+          textInputStyle={styles.otpInput}
+          inputCount={4}
+          tintColor="#1676F3"
+          offTintColor="#ccc"
+        />
+        {/* <OTPTextInput ref={(e) => (otpInput = e)} tintColor /> */}
+      </View>
       <CountDown
         until={60}
         size={30}
-        digitStyle={{backgroundColor: '#FFF'}}
-        digitTxtStyle={{color: '#1676F3'}}
-        timeToShow={['S']}
-        timeLabels={{s: 'secs'}}
-        onFinish={() => alert('finished')}
-        onPress={() => alert('counting...')}
+        digitStyle={{ backgroundColor: "#FFF" }}
+        digitTxtStyle={{ color: "#1676F3" }}
+        timeToShow={["S"]}
+        timeLabels={{ s: "secs" }}
+        onFinish={() => alert("finished")}
+        onPress={() => alert("counting...")}
       />
       <View
         style={{
@@ -104,7 +116,7 @@ const OTPScreen = () => {
       </View>
 
       {/* Login Button */}
-      <TouchableOpacity  style={styles.loginButton}>
+      <TouchableOpacity style={styles.loginButton}>
         <Text
           style={{
             fontFamily: "Poppins-Medium",
@@ -146,6 +158,18 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 5,
     marginTop: 20,
+  },
+  otpContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  otpInput: {
+    borderWidth: 2,
+    borderRadius: 8,
+    width: 70,
+    height: 70,
+    textAlign: "center",
+    fontSize: 24,
   },
 });
 
