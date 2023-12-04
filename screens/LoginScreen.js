@@ -11,7 +11,7 @@ import Checkbox from "expo-checkbox";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
-import app from "../Firebase";
+import app from "../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const auth = getAuth(app);

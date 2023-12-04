@@ -11,7 +11,7 @@ import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { sendPasswordResetEmail, getAuth } from "@firebase/auth";
-import app from "../Firebase";
+import app from "../firebase";
 
 const auth = getAuth(app);
 const ForgotPasswordScreen = () => {

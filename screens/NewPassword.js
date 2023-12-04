@@ -10,7 +10,7 @@ import {
 import { useFonts } from "expo-font";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
-import app from "../Firebase";
+import app from "../firebase";
 import { getAuth, updatePassword } from "firebase/auth";
 
 const auth = getAuth(app);

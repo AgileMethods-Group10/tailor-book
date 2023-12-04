@@ -14,7 +14,7 @@ import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import app from "../Firebase";
+import app from "../firebase";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
