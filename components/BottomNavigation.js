@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import NewPasswordScreen from "../screens/NewPassword";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Collection from "../screens/Collection";
 
 const Tab = createBottomTabNavigator();
 const BottomNavbar = () => {
@@ -18,14 +18,13 @@ const BottomNavbar = () => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
-        initialRouteName="Orders"
         screenOptions={{
           tabBarActiveTintColor: "#1676F3",
         }}
       >
         <Tab.Screen
           name="Orders"
-          component={NewPasswordScreen}
+          component={Collection}
           options={{
             tabBarLabel: "Orders",
             tabBarIcon: ({ color, size }) => (
@@ -35,7 +34,7 @@ const BottomNavbar = () => {
         />
         <Tab.Screen
           name="Gallery"
-          component={NewPasswordScreen}
+          component={Collection}
           options={{
             tabBarLabel: "Gallery",
             tabBarIcon: ({ color, size }) => (

@@ -12,6 +12,7 @@ import * as SplashScreen from "expo-splash-screen";
 import NewPasswordScreen from './screens/NewPassword';
 import PasswordSuccessScreen from './screens/PasswordSuccess';
 import Welcome from './screens/Welcome';
+import Collection from './screens/Collection';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,6 +55,7 @@ const App = () => {
         <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
         <Stack.Screen name="PasswordSuccessScreen" component={PasswordSuccessScreen} />
         <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Collection" component={Collection} />
       </Stack.Navigator>
     </NavigationContainer>
   );
