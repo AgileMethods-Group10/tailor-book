@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Navbar from "../components/Navbar";
 import { useFonts } from "expo-font";
 import BottomNavbar from "../components/BottomNavigation";
+import { useNavigation } from "@react-navigation/native";
 
 const Welcome = () => {
   const [fontsLoaded] = useFonts({
@@ -11,6 +12,7 @@ const Welcome = () => {
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
 
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Navbar />
@@ -32,11 +34,15 @@ const Welcome = () => {
           No clients added yet get started by adding a client
         </Text>
       </View>
-      <View style={{ display: "flex", alignItems: "center", paddingBottom: 20 }}>
-        <Image
-          source={require("../assets/plus.png")}
-          style={{ width: 50, height: 50 }}
-        />
+      <View
+        style={{ display: "flex", alignItems: "center", paddingBottom: 20 }}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate("Collection")}>
+          <Image
+            source={require("../assets/plus.png")}
+            style={{ width: 50, height: 50 }}
+          />
+        </TouchableOpacity>
       </View>
       <BottomNavbar />
     </View>
