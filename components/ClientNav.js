@@ -14,9 +14,9 @@ const ClientNav = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.subContainer}>
+      <View style={styles.back}>
         <TouchableOpacity>
-          <Icon name="arrow-left" size={30} color="#000" />
+          <Icon name="arrow-left" size={30} color="#1676F3" />
         </TouchableOpacity>
       </View>
       <Text style={styles.text}>New Client Details</Text>
@@ -31,11 +31,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
   },
-  subContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignContent: "center",
-    gap: 20,
+  back: {
+    borderColor: "#e5e5e5",
+    borderWidth: 2,
+    borderRadius: 5,
   },
   text: {
     fontSize: 20,
