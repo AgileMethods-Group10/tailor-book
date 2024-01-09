@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import Navbar from "../components/Navbar";
 import { useFonts } from "expo-font";
-import BottomNavbar from "../components/BottomNavigation";
-import SVG from "../assets/pyjamas.svg";
+import PyjamasSVG from "../assets/pyjamas.svg";
+import { SvgUri } from "react-native-svg";
+import { SvgXml } from "react-native-svg";
 
 const Collection = () => {
   const [fontsLoaded] = useFonts({
@@ -50,7 +51,7 @@ const Collection = () => {
         <View style={styles.dressContainer}>
           <View style={styles.subContainer}>
             <TouchableOpacity>
-            <Image
+              <Image
                 source={require("../assets/gown.png")}
                 style={{ width: 100, height: 150 }}
               />
@@ -61,6 +62,12 @@ const Collection = () => {
           </View>
           <View style={styles.subContainer}>
             <TouchableOpacity>
+              {/* <SvgUri
+                width="100%"
+                height="100%"
+                uri="../assets/pyjamas.svg"
+              /> */}
+              {/* <PyjamasSVG width={"100%"} height={"100%"} /> */}
               <Image
                 source={require("../assets/pyjamas.png")}
                 style={{ width: 100, height: 150 }}
@@ -74,7 +81,7 @@ const Collection = () => {
         <View style={styles.dressContainer}>
           <View style={styles.subContainer}>
             <TouchableOpacity>
-            <Image
+              <Image
                 source={require("../assets/blouse.png")}
                 style={{ width: 100, height: 150 }}
               />
@@ -98,7 +105,7 @@ const Collection = () => {
         <View style={styles.dressContainer}>
           <View style={styles.subContainer}>
             <TouchableOpacity>
-            <Image
+              <Image
                 source={require("../assets/jumpsuit.png")}
                 style={{ width: 100, height: 150 }}
               />
@@ -122,7 +129,7 @@ const Collection = () => {
         <View style={styles.dressContainer}>
           <View style={styles.subContainer}>
             <TouchableOpacity>
-            <Image
+              <Image
                 source={require("../assets/skirt.png")}
                 style={{ width: 100, height: 150 }}
               />

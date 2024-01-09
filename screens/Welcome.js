@@ -35,16 +35,15 @@ const Welcome = () => {
         </Text>
       </View>
       <View
-        style={{ display: "flex", alignItems: "center", paddingBottom: 20 }}
+        style={{ display: "flex", alignItems: "center", marginBottom: "-20px" }}
       >
-        <TouchableOpacity onPress={() => navigation.navigate("Collection")}>
+        <TouchableOpacity onPress={() => navigation.navigate("AddClient")}>
           <Image
             source={require("../assets/plus.png")}
             style={{ width: 50, height: 50 }}
           />
         </TouchableOpacity>
       </View>
-      <BottomNavbar />
     </View>
   );
 };

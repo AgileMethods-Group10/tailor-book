@@ -1,25 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-// import SplashScreen from "./screens/SplashScreen";
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
-import ForgotPasswordScreen from './screens/ForgotPassword';
-import OTPScreen from './screens/OTPScreen';
+import React, { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { useFonts } from "expo-font";
 import MySplashScreen from "./screens/SplashScreen";
 import * as SplashScreen from "expo-splash-screen";
-import NewPasswordScreen from './screens/NewPassword';
-import PasswordSuccessScreen from './screens/PasswordSuccess';
-import Welcome from './screens/Welcome';
-import Collection from './screens/Collection';
+import AppStackNavigator from "./stack_navigators/AppStackNavigator";
+import { StatusBar } from "expo-status-bar";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import AuthStackNavigator from "./stack_navigators/AuthStackNavigator";
 
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
+const auth = getAuth();
 
 const App = () => {
-
+  const [loggedin, setLoggedin] = useState(false);
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
@@ -42,21 +38,18 @@ const App = () => {
   if (!isAssetsLoaded) {
     return <MySplashScreen />;
   }
-  
+  {onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setLoggedin(true);
+    } else {
+      setLoggedin(false);
+    }
+  })}
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen" headerMode="none">
-        <Stack.Screen name="SplashScreen" component={MySplashScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="SignupScreen" component={SignupScreen} />
-        <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
-        <Stack.Screen name="OTPScreen" component={OTPScreen} />
-        <Stack.Screen name="NewPasswordScreen" component={NewPasswordScreen} />
-        <Stack.Screen name="PasswordSuccessScreen" component={PasswordSuccessScreen} />
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Collection" component={Collection} />
-      </Stack.Navigator>
+      <StatusBar style="auto" />
+      {loggedin ? <AppStackNavigator /> : <AuthStackNavigator />}
     </NavigationContainer>
   );
 };
