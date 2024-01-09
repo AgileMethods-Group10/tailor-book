@@ -138,7 +138,7 @@ const AddClient = () => {
               marginVertical: 20,
             }}
           >
-            Cloth Items:
+            Fabrics Types:
           </Text>
           <ScrollView horizontal={true}>
             <View style={{display: "flex", flexDirection: "row", gap: 20}}>
