@@ -14,9 +14,6 @@ import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import {
   Calendar,
-  CalendarList,
-  Agenda,
-  LocaleConfig,
 } from "react-native-calendars";
 
 const AddClient = () => {
@@ -723,6 +720,93 @@ const AddClient = () => {
             </Text>
           </View>
         </View>
+
+        <View style={styles.firstContainer}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: "Poppins-Regular",
+              letterSpacing: 1,
+              marginVertical: 20,
+            }}
+          >
+            Payment Details:
+          </Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingVertical: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "Poppins-Regular",
+                letterSpacing: 1,
+              }}
+            >
+              Total Amount (GHS)
+            </Text>
+            <TextInput
+              placeholder="00.00"
+              style={{
+                fontSize: 18,
+                fontFamily: "Poppins-Regular",
+                letterSpacing: 1,
+                borderBottomWidth: 1,
+                borderBottomColor: "#000",
+                width: 100,
+                textAlign: "center",
+              }}
+            />
+          </View>
+        </View>
+
+        <View style={styles.firstContainer}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontFamily: "Poppins-Regular",
+              letterSpacing: 1,
+              marginVertical: 20,
+            }}
+          >
+            Additional Notes:
+          </Text>
+          <View>
+            <TextInput
+              placeholder="Type here"
+              style={{
+                fontSize: 18,
+                fontFamily: "Poppins-Regular",
+                letterSpacing: 1,
+                borderWidth: 1,
+                borderColor: "#ccc",
+                width: "100%",
+                paddingBottom: 150,
+                paddingLeft: 10,
+                borderRadius: 8,
+              }}
+            />
+          </View>
+        </View>
+
+        <View style={{ marginVertical: 20 }}>
+          <TouchableOpacity style={styles.loginButton}>
+            <Text
+              style={{
+                fontFamily: "Poppins-Medium",
+                color: "#fff",
+                textAlign: "center",
+              }}
+            >
+              Next
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -743,6 +827,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginVertical: 20,
     paddingBottom: 20,
+  },
+  loginButton: {
+    backgroundColor: "#1676F3",
+    paddingVertical: 14,
+    borderRadius: 5,
   },
 });
 export default AddClient;
