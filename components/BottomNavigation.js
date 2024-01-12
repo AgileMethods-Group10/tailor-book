@@ -32,6 +32,7 @@ const BottomNavbar = () => {
             tabBarActiveTintColor: "#1676F3",
             headerShown: false,
           }}
+          style={{borderTopColor: "transparent"}}
         >
           <Tab.Screen
             name="Welcome"

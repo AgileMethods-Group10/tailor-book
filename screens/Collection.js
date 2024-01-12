@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     height: "100%",
     paddingTop: 80,
     paddingHorizontal: 30,
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#f7fafc",
     fontFamily: "Poppins-Regular",
   },
   dressContainer: {
