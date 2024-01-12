@@ -2,8 +2,10 @@ import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
 import React from "react";
 import NotifsNav from "../components/NotifsNav";
 import { Icon } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Notifications() {
+    const navigation = useNavigation();
   return (
     <SafeAreaView>
       <View style={{ paddingHorizontal: 20, paddingVertical: 30 }}>
