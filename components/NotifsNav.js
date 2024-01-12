@@ -15,7 +15,7 @@ const NotifsNav = () => {
   return (
     <View style={styles.container}>
       <View style={styles.back}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={navigation.goBack}>
           <Icon name="arrow-left" size={30} color="#1676F3" />
         </TouchableOpacity>
       </View>
