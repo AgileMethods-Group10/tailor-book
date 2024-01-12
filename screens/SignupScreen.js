@@ -185,10 +185,10 @@ const SignupScreen = () => {
         </Text>
       </TouchableOpacity>
 
-      <View style={styles.divider} />
+      {/* <View style={styles.divider} /> */}
 
       {/* Social Logos */}
-      <View style={styles.socialLogosContainer}>
+      {/* <View style={styles.socialLogosContainer}>
         <Image
           source={require("../assets/google.png")}
           style={styles.socialLogo}
@@ -205,7 +205,7 @@ const SignupScreen = () => {
           source={require("../assets/twitter.png")}
           style={styles.socialLogo}
         />
-      </View>
+      </View> */}
       <View
         style={{
           display: "flex",
