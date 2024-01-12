@@ -183,7 +183,7 @@ const AddClient = () => {
               marginVertical: 20,
             }}
           >
-            Delivery Date:
+            Order Date:
           </Text>
           <Calendar
             onDayPress={(day) => {
@@ -212,7 +212,7 @@ const AddClient = () => {
               marginVertical: 20,
             }}
           >
-            Remind Date: (Set a reminder)
+            Delivery Date:
           </Text>
           <Calendar
             onDayPress={(day) => {
@@ -795,7 +795,7 @@ const AddClient = () => {
         </View>
 
         <View style={{ marginVertical: 20 }}>
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity style={styles.loginButton}  onPress={() => navigation.navigate("ClientProfile")}>
             <Text
               style={{
                 fontFamily: "Poppins-Medium",
