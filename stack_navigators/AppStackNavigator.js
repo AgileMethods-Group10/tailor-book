@@ -6,6 +6,7 @@ import AddClient from "../screens/AddClient";
 import ClientProfile from "../screens/ClientProfile";
 import Collection from "../screens/Collection";
 import Bill from "../screens/Bill";
+import Notifications from "../screens/Notifications";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function AppStackNavigator() {
       <Stack.Screen name="ClientProfile" component={ClientProfile} />
       <Stack.Screen name="Collection" component={Collection} />
       <Stack.Screen name="Bill" component={Bill} />
+      <Stack.Screen name="Notifications" component={Notifications} />
     </Stack.Navigator>
   );
 }

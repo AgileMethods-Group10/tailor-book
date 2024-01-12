@@ -5,7 +5,7 @@ import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 
-const Navbar = () => {
+const NotifsNav = () => {
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
@@ -14,16 +14,12 @@ const Navbar = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Tailor
-        <Text style={styles.span}>Book.</Text>
-      </Text>
-      <View style={styles.subContainer}>
-        <Icon name="search" size={30} color="#000" />
-        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
-          <Icon name="notifications" size={30} color="#000" />
+      <View style={styles.back}>
+        <TouchableOpacity>
+          <Icon name="arrow-left" size={30} color="#1676F3" />
         </TouchableOpacity>
       </View>
+      <Text style={styles.text}>Notifications</Text>
     </View>
   );
 };
@@ -35,21 +31,20 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
   },
-  subContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignContent: "center",
-    gap: 20,
+  back: {
+    borderColor: "#e5e5e5",
+    borderWidth: 2,
+    borderRadius: 5,
   },
   text: {
-    fontSize: 24,
-    fontWeight: "bold",
-    fontFamily: "Poppins-Bold",
-    letterSpacing: 1,
+    fontSize: 20,
+    fontWeight: "600",
+    fontFamily: "Poppins-Regular",
+    letterSpacing: -0.34,
   },
   span: {
     fontWeight: "300",
     fontFamily: "Poppins-Regular",
   },
 });
-export default Navbar;
+export default NotifsNav;
