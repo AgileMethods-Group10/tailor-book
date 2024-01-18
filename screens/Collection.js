@@ -28,73 +28,19 @@ const Collection = () => {
           <View style={styles.subContainer}>
             <TouchableOpacity>
               <Image
-                source={require("../assets/dress1.png")}
-                style={{ width: 100, height: 150 }}
+                source={require("../assets/fit1.png")}
+                style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
             <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Black Jalabia
+              Cardigan
             </Text>
           </View>
           <View style={styles.subContainer}>
             <TouchableOpacity>
               <Image
-                source={require("../assets/dress2.png")}
-                style={{ width: 100, height: 150 }}
-              />
-            </TouchableOpacity>
-            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Straight Dress
-            </Text>
-          </View>
-        </View>
-        <View style={styles.dressContainer}>
-          <View style={styles.subContainer}>
-            <TouchableOpacity>
-              <Image
-                source={require("../assets/gown.png")}
-                style={{ width: 100, height: 150 }}
-              />
-            </TouchableOpacity>
-            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Gown
-            </Text>
-          </View>
-          <View style={styles.subContainer}>
-            <TouchableOpacity>
-              {/* <SvgUri
-                width="100%"
-                height="100%"
-                uri="../assets/pyjamas.svg"
-              /> */}
-              {/* <PyjamasSVG width={"100%"} height={"100%"} /> */}
-              <Image
-                source={require("../assets/pyjamas.png")}
-                style={{ width: 100, height: 150 }}
-              />
-            </TouchableOpacity>
-            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Pyjamas
-            </Text>
-          </View>
-        </View>
-        <View style={styles.dressContainer}>
-          <View style={styles.subContainer}>
-            <TouchableOpacity>
-              <Image
-                source={require("../assets/blouse.png")}
-                style={{ width: 100, height: 150 }}
-              />
-            </TouchableOpacity>
-            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Blouse
-            </Text>
-          </View>
-          <View style={styles.subContainer}>
-            <TouchableOpacity>
-              <Image
-                source={require("../assets/indian-wear.png")}
-                style={{ width: 100, height: 150 }}
+                source={require("../assets/fit2.png")}
+                style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
             <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
@@ -106,23 +52,29 @@ const Collection = () => {
           <View style={styles.subContainer}>
             <TouchableOpacity>
               <Image
-                source={require("../assets/jumpsuit.png")}
-                style={{ width: 100, height: 150 }}
+                source={require("../assets/fit3.png")}
+                style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
             <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Jumpsuit
+              Two Piece
             </Text>
           </View>
           <View style={styles.subContainer}>
             <TouchableOpacity>
+              {/* <SvgUri
+                width="100%"
+                height="100%"
+                uri="../assets/pyjamas.svg"
+              /> */}
+              {/* <PyjamasSVG width={"100%"} height={"100%"} /> */}
               <Image
-                source={require("../assets/pleated-dress.png")}
-                style={{ width: 100, height: 150 }}
+                source={require("../assets/fit4.png")}
+                style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
             <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Pleated Dress
+              African Wear
             </Text>
           </View>
         </View>
@@ -130,23 +82,71 @@ const Collection = () => {
           <View style={styles.subContainer}>
             <TouchableOpacity>
               <Image
-                source={require("../assets/skirt.png")}
-                style={{ width: 100, height: 150 }}
+                source={require("../assets/fit5.png")}
+                style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
             <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Skirt
+              Blouse
             </Text>
           </View>
           <View style={styles.subContainer}>
             <TouchableOpacity>
               <Image
-                source={require("../assets/suit.png")}
-                style={{ width: 100, height: 150 }}
+                source={require("../assets/fit6.png")}
+                style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
             <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
-              Suit
+              Silk Shirt
+            </Text>
+          </View>
+        </View>
+        <View style={styles.dressContainer}>
+          <View style={styles.subContainer}>
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/fit7.png")}
+                style={{ width: 160, height: 150 }}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
+              Trousers
+            </Text>
+          </View>
+          <View style={styles.subContainer}>
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/fit8.png")}
+                style={{ width: 160, height: 150 }}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
+              Pleated Skirt
+            </Text>
+          </View>
+        </View>
+        <View style={styles.dressContainer}>
+          <View style={styles.subContainer}>
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/fit9.png")}
+                style={{ width: 160, height: 150 }}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
+              Loose Trousers
+            </Text>
+          </View>
+          <View style={styles.subContainer}>
+            <TouchableOpacity>
+              <Image
+                source={require("../assets/fit10.png")}
+                style={{ width: 160, height: 150 }}
+              />
+            </TouchableOpacity>
+            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
+              Jalabia
             </Text>
           </View>
         </View>
