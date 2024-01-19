@@ -50,7 +50,7 @@ export default function Bill() {
                 color: "#bbb",
               }}
             >
-              GHC 200.00    
+              GHC 500.00    
             </Text>
           </View>
           <View
@@ -79,7 +79,7 @@ export default function Bill() {
                 color: "#bbb",
               }}
             >
-              GHC 200.00
+              GHC 500.00
             </Text>
           </View>
 

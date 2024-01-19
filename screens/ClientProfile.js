@@ -118,7 +118,7 @@ export default function ClientProfile() {
                 padding: 10,
               }}
             >
-              May 12,2002
+              Jan 19,2024
             </Text>
           </View>
           {loading ? (
