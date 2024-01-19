@@ -8,6 +8,7 @@ import AppStackNavigator from "./stack_navigators/AppStackNavigator";
 import { StatusBar } from "expo-status-bar";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import AuthStackNavigator from "./stack_navigators/AuthStackNavigator";
+import { registerRootComponent } from 'expo';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -54,4 +55,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default registerRootComponent(App);

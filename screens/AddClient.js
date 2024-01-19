@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,14 +12,16 @@ import {
 import ClientNav from "../components/ClientNav";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
-import {
-  Calendar,
-} from "react-native-calendars";
+import { Calendar } from "react-native-calendars";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase";
 
 const AddClient = () => {
   const [selectedDate, setSelectedDate] = useState(false);
   const [remindDate, setRemindDate] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [clientName, setClientName] = useState("");
+  const [loading, setLoading] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
@@ -28,6 +30,28 @@ const AddClient = () => {
   });
 
   const navigation = useNavigation();
+  const handleClientInputChange = (text) => {
+    setClientName(text);
+  };
+  const handleAddClientData = async () => {
+    try {
+      setLoading(true);
+      const docRef = await addDoc(collection(db, "users"), {
+        clientName: clientName,
+        // Add other fields as needed
+      });
+      setLoading(false);
+      // navigation.navigate("ClientProfile");
+      // if (loading === false) {
+        navigation.navigate("ClientProfile");
+      // }
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      setLoading(false);
+    }
+    setLoading(false);
+  };
   return (
     <View style={styles.container}>
       <ClientNav />
@@ -64,6 +88,8 @@ const AddClient = () => {
                 fontFamily: "Poppins-Regular",
                 letterSpacing: 1,
               }}
+              value={clientName}
+              onChangeText={handleClientInputChange}
             />
           </View>
           <View
@@ -795,16 +821,34 @@ const AddClient = () => {
         </View>
 
         <View style={{ marginVertical: 20 }}>
-          <TouchableOpacity style={styles.loginButton}  onPress={() => navigation.navigate("ClientProfile")}>
-            <Text
-              style={{
-                fontFamily: "Poppins-Medium",
-                color: "#fff",
-                textAlign: "center",
-              }}
-            >
-              Next
-            </Text>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => {
+              handleAddClientData();
+            
+            }}
+          >
+            {loading ? (
+              <Text
+                style={{
+                  fontFamily: "Poppins-Medium",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                loading...
+              </Text>
+            ) : (
+              <Text
+                style={{
+                  fontFamily: "Poppins-Medium",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+              >
+                Next
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

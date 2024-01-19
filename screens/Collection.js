@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import Navbar from "../components/Navbar";
 import { useFonts } from "expo-font";
-import PyjamasSVG from "../assets/pyjamas.svg";
-import { SvgUri } from "react-native-svg";
-import { SvgXml } from "react-native-svg";
+import { useNavigation } from "@react-navigation/native";
 
 const Collection = () => {
   const [fontsLoaded] = useFonts({
@@ -19,6 +17,7 @@ const Collection = () => {
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -32,7 +31,7 @@ const Collection = () => {
                 style={{ width: 160, height: 150 }}
               />
             </TouchableOpacity>
-            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }}>
+            <Text style={{ fontFamily: "Poppins-Medium", fontSize: 16 }} onPress={() => navigation.navigate("AddClient")}>
               Cardigan
             </Text>
           </View>

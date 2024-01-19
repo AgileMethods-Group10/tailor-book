@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase";
 
 const ClientNavProfile = () => {
   const [fontsLoaded] = useFonts({
@@ -12,6 +14,34 @@ const ClientNavProfile = () => {
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
   });
   const navigation = useNavigation();
+  const [clientName, setClientName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const sortedDocs = querySnapshot.docs
+        .map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          createdAt: doc.data().createdAt
+            ? doc.data().createdAt.toDate()
+            : null,
+        })) // Include the document ID and handle undefined createdAt
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)); // Handle undefined createdAt in sorting
+
+      if (sortedDocs.length > 0) {
+        setClientName(sortedDocs[0].clientName);
+      }
+      setLoading(false);
+    } catch (e) {
+      console.error("Error fetching data: ", e);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.back}>
@@ -19,7 +49,9 @@ const ClientNavProfile = () => {
           <Icon name="arrow-left" size={30} color="#1676F3" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.text}>John Doe</Text>
+      <Text style={styles.text}>
+        {loading ? "Loading..." : `${clientName}`}
+      </Text>
     </View>
   );
 };

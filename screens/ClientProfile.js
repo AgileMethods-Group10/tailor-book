@@ -1,11 +1,43 @@
 import { View, Text, SafeAreaView, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ClientNavProfile from "../components/ClientProfileNav";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function ClientProfile() {
   const navigation = useNavigation();
+
+  const [clientName, setClientName] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const sortedDocs = querySnapshot.docs
+        .map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          createdAt: doc.data().createdAt
+            ? doc.data().createdAt.toDate()
+            : null,
+        })) // Include the document ID and handle undefined createdAt
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)); // Handle undefined createdAt in sorting
+
+      if (sortedDocs.length > 0) {
+        setClientName(sortedDocs[0].clientName);
+      }
+      setLoading(false);
+    } catch (e) {
+      console.error("Error fetching data: ", e);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <SafeAreaView>
       <View style={{ paddingHorizontal: 20, paddingVertical: 30 }}>
@@ -44,7 +76,7 @@ export default function ClientProfile() {
                   letterSpacing: 1,
                 }}
               >
-                John Doe
+                {loading ? "Loading..." : `${clientName}`}
               </Text>
             </View>
             <View
@@ -89,64 +121,72 @@ export default function ClientProfile() {
               May 12,2002
             </Text>
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingTop: 30,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "Poppins-Regular",
-                letterSpacing: 1,
-              }}
-            >
-              Order Status:
-            </Text>
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "Poppins-Regular",
-                letterSpacing: 1,
-                color: "#bbb",
-              }}
-            >
-              Received
-            </Text>
-          </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingTop: 30,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "Poppins-Regular",
-                letterSpacing: 1,
-              }}
-            >
-              Payment Status:
-            </Text>
-            <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "Poppins-Regular",
-                letterSpacing: 1,
-                color: "#bbb",
-              }}
-            >
-              Incomplete
-            </Text>
-          </View>
+          {loading ? (
+            <>
+              <Text>loading client data...</Text>
+            </>
+          ) : (
+            <>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingTop: 30,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontFamily: "Poppins-Regular",
+                    letterSpacing: 1,
+                  }}
+                >
+                  Order Status:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontFamily: "Poppins-Regular",
+                    letterSpacing: 1,
+                    color: "#bbb",
+                  }}
+                >
+                  Received
+                </Text>
+              </View>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingTop: 30,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontFamily: "Poppins-Regular",
+                    letterSpacing: 1,
+                  }}
+                >
+                  Payment Status:
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontFamily: "Poppins-Regular",
+                    letterSpacing: 1,
+                    color: "#bbb",
+                  }}
+                >
+                  Incomplete
+                </Text>
+              </View>
+            </>
+          )}
 
           <View style={{ marginTop: 50 }}>
             <TouchableOpacity
